@@ -1,9 +1,13 @@
 from django.shortcuts import render, redirect
-from .models import Question, Answer, UserFundsResponse
+from .models import Fund, Question, Answer, UserFundsResponse
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.forms import AuthenticationForm
+
+def fund_list(request):
+    funds = Fund.objects.all()
+    return render(request, 'funds_list.html', {'funds': funds})
 
 def register(request):
     if request.method == 'POST':

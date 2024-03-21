@@ -1,0 +1,26 @@
+<table>
+    <tr>
+        <th>Valor</th>
+        <th>Isin</th>
+        <th>Name</th>
+        <th>Domicile</th>
+        <th>Gge</th>
+        <th>Oil</th>
+        <th>Acab</th>
+        <th>Animal</th>
+        <th>GS</th>
+    </tr>
+{% for fund in funds %}
+    <tr>
+        <td>{{ fund.valor }}</td>
+        <td>{{ fund.isin }}</td>
+        <td>{{ fund.name }}</td>
+        <td>{{ fund.domicile }}</td>
+        <td>{{ fund.gge }}</td>
+        <td>{{ fund.oil }}</td>
+        <td>{{ fund.acab }}</td>
+        <td>{{ fund.animal }}</td>
+        <td>{{ fund.gs }}</td>
+    </tr>
+{% endfor %}
+</table>
