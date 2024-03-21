@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h1>List all Funds</h1>
+  
+<ul>
+  {% for x in funds %}
+    <li>{{ x.id }} {{ x.name }}</li>
+  {% endfor %}
+</ul>
+
+</body>
+</html>
