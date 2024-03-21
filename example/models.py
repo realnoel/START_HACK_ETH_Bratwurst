@@ -9,7 +9,7 @@ class Fund(models.Model):
     oil = models.CharField(max_length=200)
     acab = models.CharField(max_length=200)
     animal = models.CharField(max_length=200)
-    gs = models.CharField(max_length=200)
+    cannabis = models.CharField(max_length=200)
 
 class Question(models.Model):
     text = models.CharField(max_length=200)

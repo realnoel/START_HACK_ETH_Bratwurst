@@ -13,9 +13,10 @@ df = pd.read_csv('EUESGMANUFACTURER.csv')
 unique_valor = df["swissValorNumber"].unique()
 
 unique_categories = df["ESGClassification"].unique()
-unique_categories = ['Greenhouse gas emissions', 'Oil', 'Anti-corruption and anti-bribery', 'Animal_Testing', 'Green securities']
+print(unique_categories)
+unique_categories = ['Greenhouse gas emissions', 'Oil', 'Anti-corruption and anti-bribery', 'Animal_Testing', 'Cannabis']
 
-new_df = pd.DataFrame(columns=['Valor', 'ISIN', 'Name', 'Domicile', 'Greenhouse gas emissions', 'Oil', 'Anti-corruption and anti-bribery', 'Animal_Testing', 'Green securities'])
+new_df = pd.DataFrame(columns=['Valor', 'ISIN', 'Name', 'Domicile', 'Greenhouse gas emissions', 'Oil', 'Anti-corruption and anti-bribery', 'Animal_Testing', 'Cannabis'])
 
 for valor_id in unique_valor:
     valor_rows = df[df["swissValorNumber"] == valor_id]
@@ -36,6 +37,6 @@ for valor_id in unique_valor:
             #print(str(valor_id) + " " + category + ": " + str(yes/total))
             new_entry[category] = yes/total
     
-    fund = Fund(valor=new_entry['Valor'], isin=new_entry['ISIN'], name=new_entry['Name'], domicile=new_entry['Domicile'], gge=new_entry['Greenhouse gas emissions'], oil=new_entry['Oil'], acab=new_entry['Anti-corruption and anti-bribery'], animal=new_entry['Animal_Testing'], gs=new_entry['Green securities'])
+    fund = Fund(valor=new_entry['Valor'], isin=new_entry['ISIN'], name=new_entry['Name'], domicile=new_entry['Domicile'], gge=new_entry['Greenhouse gas emissions'], oil=new_entry['Oil'], acab=new_entry['Anti-corruption and anti-bribery'], animal=new_entry['Animal_Testing'], cannabis=new_entry['Cannabis'])
     fund.save()
     
