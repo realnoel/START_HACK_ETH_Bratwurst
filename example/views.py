@@ -28,6 +28,9 @@ def login(request):
         form = AuthenticationForm()
     return render(request, 'login.html', {"form": form})
 
+def questionnaire(request):
+    return render(request, 'questionnaire.html')
+
 @login_required
 def logout(request):
     logout(request)
