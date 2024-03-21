@@ -106,6 +106,20 @@
             text-align: center;
             z-index: 10;
         }
+
+        .entry-box {
+    border: 2px solid #E30613;
+    background-color: #F5F5DC;
+    padding: 20px;
+    margin-bottom: 20px;
+    font-family: Arial, sans-serif;
+    transition: all 0.3s;
+    box-shadow: 5px 5px 15px;
+}
+.entry-box:hover {
+    box-shadow: 0px 0px 15px #E30613;
+    transform: scale(1.01);
+}
     </style>
 </head>
 
@@ -152,7 +166,7 @@
         }, {
             id: 5,
             text: 'Cannabis',
-            detail: 'Do you believe that investing in Cannabis is controversial?'
+            detail: ''
         }, ];
         let currentQuestionIndex = 0;
 
@@ -206,7 +220,42 @@
             resultsContainer.className = 'results-container';
             resultsContainer.innerHTML = `
         <h2>Here are your results</h2>
-        <p>...some results...</p>
+
+        <div class="entry-box">
+        <p><strong>1.</strong>
+           <strong>ISIN:</strong> FR0000293698, 
+           <strong>Name:</strong> Ecofi Tresorerie SICAV, 
+           <strong>Domicile:</strong> France</p>
+        </div>
+
+        <div class="entry-box">
+        <p><strong>2.</strong>
+           <strong>ISIN:</strong> LU0061928585, 
+           <strong>Name:</strong> OekoWorld FCP - OekoWorld OekoVision Classi, 
+           <strong>Domicile:</strong> Luxembourg</p>
+        </div>
+
+        <div class="entry-box">
+        <p><strong>3.</strong>
+           <strong>ISIN:</strong> AT0000805221, 
+           <strong>Name:</strong> Raiffeisen-Nachhaltigkeit-Rent, 
+           <strong>Domicile:</strong> Austria</p>
+        </div>
+
+        <div class="entry-box">
+        <p><strong>4.</strong>
+           <strong>ISIN:</strong> IT0005125080, 
+           <strong>Name:</strong> Amundi ESG Selection Dinamico, 
+           <strong>Domicile:</strong> Italy</p>
+        </div>
+
+        <div class="entry-box">
+        <p><strong>5.</strong>
+           <strong>ISIN:</strong> LI0306626206, 
+           <strong>Name:</strong> ACATIS Fair Value Aktien Global, 
+           <strong>Domicile:</strong> Liechtenstein</p>
+        </div>
+
         <button onclick="hideResults()">New Recommendation</button>
     `;
             document.body.appendChild(resultsContainer);
