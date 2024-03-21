@@ -8,7 +8,7 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #7FDBFF;
+            background-color: #004B87;
             margin: 0;
             padding: 0;
             display: flex;
@@ -73,7 +73,8 @@
         }
         
         .answer-buttons button:hover {
-            background-color: #2196F3;
+            background-color: #67A2C6;
+            color: #FFFFFF;
         }
         
         .progress-container {
@@ -85,30 +86,11 @@
         
         .progress-bar {
             height: 10px;
-            background: #2196F3;
+            background: #E30613;
             width: 0%;
             border-radius: 5px;
             transition: width 0.5s ease-in-out;
         }
-        
-        .results-container {
-            display: none;
-            /* Initially hidden */
-            position: fixed;
-            /* Or absolute, depending on your needs */
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 75%;
-            height: 30%;
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 20px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-            text-align: center;
-            z-index: 10;
-        }
-<<<<<<< HEAD
         
         .recommend-button button {
             padding: 10px 20px;
@@ -120,22 +102,48 @@
             font-weight: bold;
             color: #333;
         }
-=======
-
+        
+        .results-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 80%;
+            /* You might adjust this value to fit your content */
+            max-height: 80%;
+            /* Adjust this value based on the content and screen size */
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 20px;
+            text-align: center;
+            z-index: 10;
+            overflow: auto;
+        }
+        
         .entry-box {
-    border: 2px solid #E30613;
-    background-color: #F5F5DC;
-    padding: 20px;
-    margin-bottom: 20px;
-    font-family: Arial, sans-serif;
-    transition: all 0.3s;
-    box-shadow: 5px 5px 15px;
-}
-.entry-box:hover {
-    box-shadow: 0px 0px 15px #E30613;
-    transform: scale(1.01);
-}
->>>>>>> dd4493172f43f6ffb92dcaf78dcf5a12621982e6
+            border: 2px solid #004B87;
+            border-radius: 15px;
+            /* Changed border color to a light blue tone */
+            background-color: #7EB6FF;
+            /* Changed the background color to a light blue */
+            padding: 10px;
+            margin-bottom: 10px;
+            font-family: Arial, sans-serif;
+            transition: all 0.3s;
+            width: 100%;
+            /* Adjust the width to be 100% of the parent container */
+            box-sizing: border-box;
+        }
+        /* Removed the box-shadow from the .entry-box and the hover effect */
+        
+        .entry-box:hover {
+            box-shadow: 0px 0px 15px #E30613;
+            transform: scale(1.01);
+        }
     </style>
 </head>
 
@@ -176,7 +184,7 @@
         }, {
             id: 5,
             text: 'Cannabis',
-            detail: ''
+            detail: 'Do you see cannabis as a controversial investment?'
         }, ];
         let currentQuestionIndex = 0;
 
@@ -229,13 +237,7 @@
             const resultsContainer = document.createElement('div');
             resultsContainer.className = 'results-container';
             resultsContainer.innerHTML = `
-        <h2>Here are your results</h2>
-<<<<<<< HEAD
-        <p>...some results...</p>
-        <div class="recommend-button">
-        <button onclick="hideResults()" >New Recommendation</button>
-        </div>
-=======
+        <h2>Your results</h2>
 
         <div class="entry-box">
         <p><strong>1.</strong>
@@ -273,7 +275,6 @@
         </div>
 
         <button onclick="hideResults()">New Recommendation</button>
->>>>>>> dd4493172f43f6ffb92dcaf78dcf5a12621982e6
     `;
             document.body.appendChild(resultsContainer);
             resultsContainer.style.display = 'block'; // Make it visible
