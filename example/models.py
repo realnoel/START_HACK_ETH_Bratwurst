@@ -1,8 +1,15 @@
 from django.db import models
 from django.contrib.auth.models import User
-
 class Fund(models.Model):
+    valor = models.CharField(max_length=200)
+    isin = models.CharField(max_length=200)
     name = models.CharField(max_length=200)
+    domicile = models.CharField(max_length=200)
+    gge = models.CharField(max_length=200)
+    oil = models.CharField(max_length=200)
+    acab = models.CharField(max_length=200)
+    animal = models.CharField(max_length=200)
+    cannabis = models.CharField(max_length=200)
 
 class Question(models.Model):
     text = models.CharField(max_length=200)

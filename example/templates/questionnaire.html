@@ -117,9 +117,9 @@
             <div class="question-detail" id="questionDetail">Question details go here.</div>
         </div>
         <div class="answer-buttons">
-            <button onclick="handleAnswer('agree')">Agree</button>
-            <button onclick="handleAnswer('neutral')">Neutral</button>
-            <button onclick="handleAnswer('disagree')">Disagree</button>
+            <button onclick="handleAnswer('agree')">Strongly Agree</button>
+            <button onclick="handleAnswer('neutral')">Agree</button>
+            <button onclick="handleAnswer('disagree')">Neutral</button>
         </div>
         <div class="progress-container">
             <div class="progress-bar" id="progressBar"></div>
@@ -129,24 +129,24 @@
     <script>
         const questions = [{
             id: 1,
-            text: 'First Question',
-            detail: 'Detail'
+            text: 'Greenhouse Gas Emissions',
+            detail: 'Is it important to you that funds take Greenhouse Gas Emissions into consideration for choosing investments?'
         }, {
             id: 2,
-            text: 'Second Question',
-            detail: 'Detail'
+            text: 'Oil',
+            detail: 'Do you believe that the extraction of oil should be stopped?'
         }, {
             id: 3,
-            text: 'Third Question',
-            detail: 'Detail'
+            text: 'Anti-Corruption and Anti-Bribery',
+            detail: 'Is promoting integrity and discouraging corrupt practices important to you?'
         }, {
             id: 4,
-            text: 'Fourth Question',
-            detail: 'Detail'
+            text: 'Animal Testing',
+            detail: 'Are you strictly against animal testing?'
         }, {
             id: 5,
-            text: 'Fifth Question',
-            detail: 'Detail'
+            text: 'Cannabis',
+            detail: 'Do you believe that investing in Cannabis is controversial?'
         }, ];
         let currentQuestionIndex = 0;
 
