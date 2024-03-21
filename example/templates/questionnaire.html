@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Questionnaire</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #7FDBFF;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            transition: background-color 0.3s;
+        }
+        /* Additional styles to ensure the header is at the top */
+        
+        header {
+            position: absolute;
+            top: 0;
+            width: 100%;
+            /* Other styles remain the same... */
+        }
+        
+        .container {
+            background-color: #003366;
+            padding: 20px;
+            border-radius: 30px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            width: 80%;
+            max-width: 500px;
+            /* Remove margin-top if any */
+            transition: transform 0.3s;
+        }
+        /* Rest of your CSS... */
+        
+        .question-header,
+        .question-text,
+        .question-detail,
+        .answer-buttons button {
+            transition: opacity 0.5s;
+        }
+        
+        .question-text,
+        .question-detail {
+            color: #708090;
+        }
+        
+        .question-text {
+            font-size: 20px;
+            font-weight: bold;
+        }
+        
+        .question-detail {
+            font-size: 16px;
+            margin-bottom: 25px;
+        }
+        
+        .answer-buttons button {
+            padding: 10px 20px;
+            margin: 5px;
+            background-color: #708090;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            color: #333;
+        }
+        
+        .answer-buttons button:hover {
+            background-color: #7B68EE;
+        }
+        
+        .progress-container {
+            width: 100%;
+            background: #ddd;
+            border-radius: 5px;
+            margin: 20px 0;
+        }
+        
+        .progress-bar {
+            height: 10px;
+            background: #4CAF50;
+            width: 0%;
+            border-radius: 5px;
+            transition: width 0.5s ease-in-out;
+        }
+        
+        .results-container {
+            display: none;
+            /* Initially hidden */
+            position: fixed;
+            /* Or absolute, depending on your needs */
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            z-index: 10;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <div class="logo">
+            <img src="Screenshot 2024-03-12 at 17.58.29.jpg">
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="question-header">
+            <div class="question-text" id="questionText">Question Title</div>
+            <div class="question-detail" id="questionDetail">Question details go here.</div>
+        </div>
+        <div class="answer-buttons">
+            <button onclick="handleAnswer('agree')">Agree</button>
+            <button onclick="handleAnswer('neutral')">Neutral</button>
+            <button onclick="handleAnswer('disagree')">Disagree</button>
+        </div>
+        <div class="progress-container">
+            <div class="progress-bar" id="progressBar"></div>
+        </div>
+    </div>
+
+    <script>
+        const questions = [{
+            id: 1,
+            text: 'First Question',
+            detail: 'Detail'
+        }, {
+            id: 2,
+            text: 'Second Question',
+            detail: 'Detail'
+        }, {
+            id: 3,
+            text: 'Third Question',
+            detail: 'Detail'
+        }, {
+            id: 4,
+            text: 'Fourth Question',
+            detail: 'Detail'
+        }, {
+            id: 5,
+            text: 'Fifth Question',
+            detail: 'Detail'
+        }, ];
+        let currentQuestionIndex = 0;
+
+        function updateQuestion() {
+            const questionText = document.getElementById('questionText');
+            const questionDetail = document.getElementById('questionDetail');
+            const progressBar = document.getElementById('progressBar');
+
+            questionText.style.opacity = 0;
+            questionDetail.style.opacity = 0;
+
+            setTimeout(() => {
+                questionText.textContent = questions[currentQuestionIndex].text;
+                questionDetail.textContent = questions[currentQuestionIndex].detail;
+
+                questionText.style.opacity = 1;
+                questionDetail.style.opacity = 1;
+
+                const progressPercentage = ((currentQuestionIndex + 1) / questions.length) * 100;
+                progressBar.style.width = `${progressPercentage}%`;
+            }, 500);
+        }
+
+        function handleAnswer(answer) {
+            console.log(`Answered: ${answer}`);
+            // Move to the next question if not at the end
+            if (currentQuestionIndex < questions.length - 1) {
+                currentQuestionIndex++;
+                updateQuestion();
+            }
+        }
+
+        function navigate(direction) {
+            if (direction === 'prev' && currentQuestionIndex > 0) {
+                currentQuestionIndex--;
+                updateQuestion();
+            } else if (direction === 'next' && currentQuestionIndex < questions.length - 1) {
+                currentQuestionIndex++;
+                updateQuestion();
+            }
+        }
+
+        // Initialize with the first question
+        document.addEventListener('DOMContentLoaded', () => {
+            updateQuestion();
+        });
+
+        function showResults() {
+            // Create results container
+            const resultsContainer = document.createElement('div');
+            resultsContainer.className = 'results-container';
+            resultsContainer.innerHTML = `
+        <h2>Here are your results</h2>
+        <p>...some results...</p>
+        <button onclick="hideResults()">New Recommendation</button>
+    `;
+            document.body.appendChild(resultsContainer);
+            resultsContainer.style.display = 'block'; // Make it visible
+        }
+
+        function hideResults() {
+            const resultsContainer = document.querySelector('.results-container');
+            if (resultsContainer) {
+                document.body.removeChild(resultsContainer); // Remove the results container from the DOM
+            }
+            // Reset the questionnaire
+            currentQuestionIndex = 0;
+            updateQuestion();
+        }
+
+
+        function handleAnswer(answer) {
+            console.log(`Answered: ${answer}`);
+            // If it's the last question
+            if (currentQuestionIndex === questions.length - 1) {
+                showResults(); // Show results container
+            } else {
+                // Move to the next question if not at the end
+                currentQuestionIndex++;
+                updateQuestion();
+            }
+        }
+
+        // Rest of your JavaScript code...
+    </script>
+</body>
+
+</html>
