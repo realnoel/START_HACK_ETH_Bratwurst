@@ -1,12 +1,12 @@
 # example/urls.py
 from django.urls import path
 
-from example.views import index
+from example.views import register, login, logout, recommender
 
 
 urlpatterns = [
-    path('register/', views.register, name='register'),
-    path('login/', views.login, name='login'),
-    path('logout/', views.logout, name='logout'),
-    path('recommender/', views.recommender, name='recommender'),
+    path('register/', register, name='register'),
+    path('login/', login, name='login'),
+    path('logout/', logout, name='logout'),
+    path('recommender/', recommender, name='recommender'),
 ]
