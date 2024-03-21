@@ -73,7 +73,7 @@
         }
         
         .answer-buttons button:hover {
-            background-color: #f9e085;
+            background-color: #7B68EE;
         }
         
         .progress-container {
@@ -89,6 +89,22 @@
             width: 0%;
             border-radius: 5px;
             transition: width 0.5s ease-in-out;
+        }
+        
+        .results-container {
+            display: none;
+            /* Initially hidden */
+            position: fixed;
+            /* Or absolute, depending on your needs */
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            z-index: 10;
         }
     </style>
 </head>
@@ -183,6 +199,44 @@
         document.addEventListener('DOMContentLoaded', () => {
             updateQuestion();
         });
+
+        function showResults() {
+            // Create results container
+            const resultsContainer = document.createElement('div');
+            resultsContainer.className = 'results-container';
+            resultsContainer.innerHTML = `
+        <h2>Here are your results</h2>
+        <p>...some results...</p>
+        <button onclick="hideResults()">New Recommendation</button>
+    `;
+            document.body.appendChild(resultsContainer);
+            resultsContainer.style.display = 'block'; // Make it visible
+        }
+
+        function hideResults() {
+            const resultsContainer = document.querySelector('.results-container');
+            if (resultsContainer) {
+                document.body.removeChild(resultsContainer); // Remove the results container from the DOM
+            }
+            // Reset the questionnaire
+            currentQuestionIndex = 0;
+            updateQuestion();
+        }
+
+
+        function handleAnswer(answer) {
+            console.log(`Answered: ${answer}`);
+            // If it's the last question
+            if (currentQuestionIndex === questions.length - 1) {
+                showResults(); // Show results container
+            } else {
+                // Move to the next question if not at the end
+                currentQuestionIndex++;
+                updateQuestion();
+            }
+        }
+
+        // Rest of your JavaScript code...
     </script>
 </body>
 
