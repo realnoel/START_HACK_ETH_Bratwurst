@@ -12,10 +12,23 @@
             margin: 0;
             padding: 0;
             display: flex;
-            justify-content: center;
+            flex-direction: column;
             align-items: center;
             height: 100vh;
-            transition: background-color 0.3s;
+        }
+        
+        header {
+            width: 100%;
+            padding: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: flex-end;
+            background-color: #003366;
+            color: #fff;
+        }
+        
+        .logo {
+            margin-right: 20px;
         }
         
         .container {
@@ -26,17 +39,19 @@
             text-align: center;
             width: 80%;
             max-width: 500px;
-            transition: transform 0.3s;
+            margin-top: 20px;
         }
         
-        .question-header {
-            margin-bottom: 15px;
+        .question-header,
+        .question-text,
+        .question-detail,
+        .answer-buttons button {
+            transition: opacity 0.5s;
         }
         
         .question-text,
         .question-detail {
             color: #708090;
-            transition: opacity 0.5s ease;
         }
         
         .question-text {
@@ -58,24 +73,11 @@
             cursor: pointer;
             font-weight: bold;
             color: #333;
-            transition: background-color 0.3s;
         }
         
         .answer-buttons button:hover {
             background-color: #f9e085;
         }
-        
-        .navigation span {
-            color: #C0C0C0;
-            cursor: pointer;
-            display: inline-block;
-            margin: 0 10px;
-        }
-        
-        .navigation span.hidden {
-            visibility: hidden;
-        }
-        /* Progress bar container */
         
         .progress-container {
             width: 100%;
@@ -83,20 +85,23 @@
             border-radius: 5px;
             margin: 20px 0;
         }
-        /* Progress bar */
         
         .progress-bar {
             height: 10px;
             background: #4CAF50;
             width: 0%;
             border-radius: 5px;
-            /* added border-radius to progress bar */
             transition: width 0.5s ease-in-out;
         }
     </style>
 </head>
 
 <body>
+
+    <header>
+        <div class="logo">Logo Here</div>
+    </header>
+
     <div class="container">
         <div class="question-header">
             <div class="question-text" id="questionText">Question Title</div>
@@ -107,35 +112,32 @@
             <button onclick="handleAnswer('neutral')">Neutral</button>
             <button onclick="handleAnswer('disagree')">Disagree</button>
         </div>
-        <div class="navigation">
-            <span id="previous" onclick="navigate('prev')" class="hidden">Previous Question</span>
-            <span id="next" onclick="navigate('next')">Next Question</span>
-        </div>
         <div class="progress-container">
             <div class="progress-bar" id="progressBar"></div>
         </div>
     </div>
+
     <script>
         const questions = [{
             id: 1,
             text: 'First Question',
-            detail: 'Detail for the first question.'
+            detail: 'Detail'
         }, {
             id: 2,
             text: 'Second Question',
-            detail: 'Detail for the second question.'
+            detail: 'Detail'
         }, {
             id: 3,
             text: 'Third Question',
-            detail: 'Detail for the third question.'
+            detail: 'Detail'
         }, {
             id: 4,
             text: 'Fourth Question',
-            detail: 'Detail for the fourth question.'
+            detail: 'Detail'
         }, {
             id: 5,
             text: 'Fifth Question',
-            detail: 'Detail for the fifth question.'
+            detail: 'Detail'
         }, ];
         let currentQuestionIndex = 0;
 
@@ -144,53 +146,45 @@
             const questionDetail = document.getElementById('questionDetail');
             const progressBar = document.getElementById('progressBar');
 
-            // Update the question text and detail
-            questionText.textContent = questions[currentQuestionIndex].text;
-            questionDetail.textContent = questions[currentQuestionIndex].detail;
+            questionText.style.opacity = 0;
+            questionDetail.style.opacity = 0;
 
-            // Update the progress bar
-            const progress = ((currentQuestionIndex + 1) / questions.length) * 100;
-            progressBar.style.width = `${progress}%`;
+            setTimeout(() => {
+                questionText.textContent = questions[currentQuestionIndex].text;
+                questionDetail.textContent = questions[currentQuestionIndex].detail;
 
-            // Update the visibility of navigation buttons
-            document.getElementById('previous').classList.toggle('hidden', currentQuestionIndex === 0);
-            document.getElementById('next').classList.toggle('hidden', currentQuestionIndex === questions.length - 1);
+                questionText.style.opacity = 1;
+                questionDetail.style.opacity = 1;
+
+                const progressPercentage = ((currentQuestionIndex + 1) / questions.length) * 100;
+                progressBar.style.width = `${progressPercentage}%`;
+            }, 500);
         }
 
         function handleAnswer(answer) {
             console.log(`Answered: ${answer}`);
+            // Move to the next question if not at the end
             if (currentQuestionIndex < questions.length - 1) {
                 currentQuestionIndex++;
-                // Adding a fade effect
-                fadeEffect();
+                updateQuestion();
             }
         }
 
         function navigate(direction) {
-            if (direction === 'next' && currentQuestionIndex < questions.length - 1) {
-                currentQuestionIndex++;
-            } else if (direction === 'prev' && currentQuestionIndex > 0) {
+            if (direction === 'prev' && currentQuestionIndex > 0) {
                 currentQuestionIndex--;
-            }
-            // Adding a fade effect
-            fadeEffect();
-        }
-
-        function fadeEffect() {
-            const container = document.querySelector('.container');
-            container.style.opacity = 1;
-            setTimeout(() => {
                 updateQuestion();
-                container.style.opacity = 1;
-            }, 100); // Adjust timing to match CSS transition
+            } else if (direction === 'next' && currentQuestionIndex < questions.length - 1) {
+                currentQuestionIndex++;
+                updateQuestion();
+            }
         }
 
         // Initialize with the first question
-        window.onload = () => {
+        document.addEventListener('DOMContentLoaded', () => {
             updateQuestion();
-        };
+        });
     </script>
-
 </body>
 
 </html>
